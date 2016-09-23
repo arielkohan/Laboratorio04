@@ -28,6 +28,7 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
 
     @Override
     protected void onPostExecute(List<Departamento> departamentos) {
+        listener.busquedaFinalizada(departamentos);
     }
 
     @Override
@@ -45,6 +46,24 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
         Ciudad ciudadBuscada = busqueda[0].getCiudad();
         // TODO implementar: buscar todos los departamentos del sistema e ir chequeando las condiciones 1 a 1.
         // si cumplen las condiciones agregarlo a los resultados.
+
+        FormBusqueda busquedaActual = busqueda[0];       //SI HAGO ESTO PODRIA REEMPLAZARLO ARRIBA PERO POR LAS DUDAS AHORA NO LO HAGO
+
+        for( Departamento d: todos ){
+            if(
+                (busquedaActual.getPermiteFumar() == ! d.getNoFumador()) &&
+                (ciudadBuscada.equals(d.getCiudad())) &&
+                //(busquedaActual.getHuespedes() == )&& TODO: VER EL TEMA HUESPEDES
+                (busquedaActual.getPrecioMaximo() == null   ||  busquedaActual.getPrecioMaximo() >= d.getPrecio()) &&
+                (busquedaActual.getPrecioMinimo() == null   ||   busquedaActual.getPrecioMinimo() <= d.getPrecio())
+            )   {
+
+                        resultado.add(d);
+
+                }
+        }
+
+
         return resultado;
     }
 }

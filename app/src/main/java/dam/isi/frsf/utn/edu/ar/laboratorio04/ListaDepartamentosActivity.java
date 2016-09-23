@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,16 +21,16 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 public class ListaDepartamentosActivity extends AppCompatActivity implements BusquedaFinalizadaListener<Departamento> {
 
     private TextView tvEstadoBusqueda;
-    private ListView listaAlojamientos;
+    private ListView listViewAlojamientos;
     private DepartamentoAdapter departamentosAdapter;
-    private List<Departamento> lista;
+    private List<Departamento> listaDepartamentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alojamientos);
-        lista= new ArrayList<>();
-        listaAlojamientos= (ListView ) findViewById(R.id.listaAlojamientos);
+        listaDepartamentos = new ArrayList<>();
+        listViewAlojamientos = (ListView ) findViewById(R.id.listaAlojamientos);
         tvEstadoBusqueda = (TextView) findViewById(R.id.estadoBusqueda);
 
     }
@@ -38,6 +40,11 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
+        listaDepartamentos =Departamento.getAlojamientosDisponibles();
+
+        departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this, listaDepartamentos);
+        listViewAlojamientos.setAdapter(departamentosAdapter);
+
         if(esBusqueda){
             FormBusqueda fb = (FormBusqueda ) intent.getSerializableExtra("frmBusqueda");
             new BuscarDepartamentosTask(ListaDepartamentosActivity.this).execute(fb);
@@ -45,15 +52,33 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
             tvEstadoBusqueda.setVisibility(View.VISIBLE);
         }else{
             tvEstadoBusqueda.setVisibility(View.GONE);
-            lista=Departamento.getAlojamientosDisponibles();
         }
-        departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this,lista);
-        listaAlojamientos.setAdapter(departamentosAdapter);
     }
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
         //TODO implementar
+
+
+        Log.i("TAMAÑO LISTA", listaDepartamento.size() + "");
+        if(listaDepartamento.size() > 0){
+            listaDepartamentos.clear();
+
+            listaDepartamentos.addAll(listaDepartamento);
+            //listaDepartamentos.add(listaDepartamento.get(0));
+           // departamentosAdapter.clear();
+            //departamentosAdapter.addAll(listaDepartamento);
+            //departamentosAdapter.add(listaDepartamento.get(0));
+            tvEstadoBusqueda.setVisibility(View.INVISIBLE);
+
+            departamentosAdapter.notifyDataSetChanged();
+            //((BaseAdapter) listViewAlojamientos.getAdapter()).notifyDataSetChanged();
+
+        } else{
+            tvEstadoBusqueda.setVisibility(View.VISIBLE);
+            tvEstadoBusqueda.setText("No hay departamentos con estas caracteristicas"); //TODO: SACAR A RES VALUES STRING
+        }
+
     }
 
     @Override
