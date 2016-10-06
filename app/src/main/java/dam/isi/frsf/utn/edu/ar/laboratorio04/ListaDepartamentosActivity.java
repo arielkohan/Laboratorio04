@@ -1,6 +1,7 @@
 package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -62,16 +63,20 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
         Log.i("TAMAÑO LISTA", listaDepartamento.size() + "");
         if(listaDepartamento.size() > 0){
-            listaDepartamentos.clear();
+            //listaDepartamentos.clear();
 
-            listaDepartamentos.addAll(listaDepartamento);
+            //listaDepartamentos.addAll(listaDepartamento);
             //listaDepartamentos.add(listaDepartamento.get(0));
-           // departamentosAdapter.clear();
-            //departamentosAdapter.addAll(listaDepartamento);
+            departamentosAdapter.clear();
+            Log.i("LISTA DESPUES DE CLEAR:",departamentosAdapter.getCount() +"");
+            departamentosAdapter.addAll(listaDepartamento);
+            Log.i("LISTA DESPUES D ADDALL:",departamentosAdapter.getCount() +"");
             //departamentosAdapter.add(listaDepartamento.get(0));
             tvEstadoBusqueda.setVisibility(View.INVISIBLE);
 
             departamentosAdapter.notifyDataSetChanged();
+            listViewAlojamientos.setVisibility(View.VISIBLE);
+            listViewAlojamientos.setBackgroundColor(Color.RED);
             //((BaseAdapter) listViewAlojamientos.getAdapter()).notifyDataSetChanged();
 
         } else{

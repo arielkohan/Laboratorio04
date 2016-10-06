@@ -18,6 +18,7 @@ public class DepartamentoAdapter extends ArrayAdapter<Departamento> {
 
     public DepartamentoAdapter(Context contexto, List<Departamento> items) {
         super(contexto, R.layout.fila, items);
+        this.contexto = contexto;
         inflater = LayoutInflater.from(contexto);
     }
 
