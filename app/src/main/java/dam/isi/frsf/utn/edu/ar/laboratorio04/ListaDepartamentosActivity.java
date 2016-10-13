@@ -76,8 +76,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
             departamentosAdapter.notifyDataSetChanged();
             listViewAlojamientos.setVisibility(View.VISIBLE);
-            listViewAlojamientos.setBackgroundColor(Color.RED);
-            //((BaseAdapter) listViewAlojamientos.getAdapter()).notifyDataSetChanged();
+            Log.i("Primer elemento",departamentosAdapter.getItem(1).toString() +"");
 
         } else{
             tvEstadoBusqueda.setVisibility(View.VISIBLE);
