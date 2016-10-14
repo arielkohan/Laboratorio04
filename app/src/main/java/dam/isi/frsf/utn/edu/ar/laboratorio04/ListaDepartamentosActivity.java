@@ -79,6 +79,7 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
             Log.i("Primer elemento",departamentosAdapter.getItem(1).toString() +"");
 
         } else{
+            departamentosAdapter.clear();
             tvEstadoBusqueda.setVisibility(View.VISIBLE);
             tvEstadoBusqueda.setText("No hay departamentos con estas caracteristicas"); //TODO: SACAR A RES VALUES STRING
         }

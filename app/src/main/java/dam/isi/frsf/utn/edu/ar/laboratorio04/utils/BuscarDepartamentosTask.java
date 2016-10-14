@@ -41,6 +41,7 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
     @Override
     protected List<Departamento> doInBackground(FormBusqueda... busqueda) {
         List<Departamento> todos = Departamento.getAlojamientosDisponibles();
+        Log.i("size departamentos", todos.size() + "");
         List<Departamento> resultado = new ArrayList<Departamento>();
         int contador = 0;
         Ciudad ciudadBuscada = busqueda[0].getCiudad();
