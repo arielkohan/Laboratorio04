@@ -41,7 +41,10 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
         super.onStart();
         Intent intent = getIntent();
         Boolean esBusqueda = intent.getExtras().getBoolean("esBusqueda");
-        listaDepartamentos =Departamento.getAlojamientosDisponibles();
+
+        for(Departamento dpto: Departamento.getAlojamientosDisponibles()){
+            listaDepartamentos.add(dpto);
+        }
 
         departamentosAdapter = new DepartamentoAdapter(ListaDepartamentosActivity.this, listaDepartamentos);
         listViewAlojamientos.setAdapter(departamentosAdapter);
@@ -58,8 +61,6 @@ public class ListaDepartamentosActivity extends AppCompatActivity implements Bus
 
     @Override
     public void busquedaFinalizada(List<Departamento> listaDepartamento) {
-        //TODO implementar
-
 
         Log.i("TAMAÑO LISTA", listaDepartamento.size() + "");
         if(listaDepartamento.size() > 0){
