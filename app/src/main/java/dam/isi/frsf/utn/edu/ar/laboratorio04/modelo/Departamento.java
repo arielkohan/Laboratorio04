@@ -180,4 +180,9 @@ public class Departamento implements Serializable {
         return _ALOJAMIENTOS_DISPONIBLES;
     }
 
+    public void agregarReserva(Reserva reserva) {
+        if(reservas == null)
+            reservas = new ArrayList<Reserva>();
+        reservas.add(reserva);
+    }
 }

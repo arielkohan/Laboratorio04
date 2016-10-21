@@ -6,4 +6,8 @@
     <string name="navigation_drawer_close">Ocultar Opciones</string>
 
     <string name="action_settings">Configuracion</string>
+    <string name="fecha_inicio">Fecha Inicio (formato:"dd-mm-aaaa"):</string>
+    <string name="fecha_fin">Fecha fin (formato:"dd-mm-aaaa"):</string>
+    <string name="precio_final">Precio final:</string>
+    <string name="departamento">Departamento:</string>
 </resources>

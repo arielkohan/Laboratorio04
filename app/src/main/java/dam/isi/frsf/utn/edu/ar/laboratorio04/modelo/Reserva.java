@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by mdominguez on 22/09/16.
  */
 public class Reserva implements Serializable {
-
+    public static int lastId = 0;
     private Integer id;
     private Date fechaInicio;
     private Date fechaFin;
@@ -18,11 +18,34 @@ public class Reserva implements Serializable {
 
     public Reserva(){}
 
-    public Reserva(Integer id, Date fechaInicio, Date fechaFin, Departamento departamento) {
-        this.id = id;
+    public Reserva(int id, Date fechaInicio, Date fechaFin, Departamento departamento){
+        this.id = ++lastId;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.departamento = departamento;
+        calcularPrecio();
+    }
+
+    public Reserva(Date fechaInicio, Date fechaFin, Departamento departamento){
+        this.id = ++lastId;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.departamento = departamento;
+        calcularPrecio();
+    }
+
+    public Reserva(Date fechaInicio, Date fechaFin, Departamento departamento, Usuario usuario) {
+        this.id = ++lastId;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.departamento = departamento;
+        this.usuario = usuario;
+        calcularPrecio();
+    }
+
+    private void calcularPrecio() {
+        int days = (int) ((fechaFin.getTime() - fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
+        this.precio = departamento.getPrecio() * days;
     }
 
     public Integer getId() {
