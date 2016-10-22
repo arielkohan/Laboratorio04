@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title = "Preferencias de usuario"
+        android:key= "pref_user"
+        >
+        <EditTextPreference
+            android:title="Nombre de usuario"
+            android:key="pref_nombre">Usuario01</EditTextPreference>
+        <EditTextPreference
+            android:title="Correo electronico"
+            android:inputType="textEmailAddress"
+            android:key="pref_email" >user@mail.com</EditTextPreference>
+        <RingtonePreference
+            android:title="Ringtone de notificación"
+            android:key="pref_ringtone"
+            android:ringtoneType="notification" />
+    </PreferenceCategory>
+</PreferenceScreen>

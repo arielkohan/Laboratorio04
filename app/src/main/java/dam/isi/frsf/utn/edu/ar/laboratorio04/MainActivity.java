@@ -2,19 +2,16 @@ package dam.isi.frsf.utn.edu.ar.laboratorio04;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +24,7 @@ import android.widget.TextView;
 import java.util.Arrays;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Ciudad;
+import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
 public class MainActivity extends AppCompatActivity
@@ -57,6 +55,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Departamento.getAlojamientosDisponibles(); //Para inicializar listas y que lista reservas ande desde el primer momento.
 
         frmBusq= new FormBusqueda();
         txtHuespedes = (EditText) findViewById(R.id.cantHuespedes);
@@ -106,11 +106,11 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress,
         boolean fromUser) {
-            if(seekBar.getId()==R.id.precioMin) {
+            if(seekBar.getId()== R.id.precioMin) {
                 tvPrecioMinimo.setText("Precio Minimo "+progress);
                 frmBusq.setPrecioMinimo(Double.valueOf(progress));
             }
-            if(seekBar.getId()==R.id.precioMax) {
+            if(seekBar.getId()== R.id.precioMax) {
                 tvPrecioMaximo.setText("Precio Maximo"+progress);
                 frmBusq.setPrecioMaximo(Double.valueOf(progress));
             }
@@ -172,8 +172,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_ofertas:
                 break;
             case R.id.nav_perfil:
+                Intent i3 = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(i3);
                 break;
             case R.id.nav_reservas:
+                Intent i4 = new Intent(MainActivity.this,ListaReservaActivity.class);
+                startActivity(i4);
                 break;
             case R.id.nav_destinos:
                 break;

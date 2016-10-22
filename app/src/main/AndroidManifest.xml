@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dam.isi.frsf.utn.edu.ar.laboratorio04">
+<manifest package="dam.isi.frsf.utn.edu.ar.laboratorio04"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -13,15 +13,37 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ListaDepartamentosActivity" />
-        <activity android:name=".AltaReservaActivity"
-                  android:label="Alta Reserva"
-            ></activity>
+        <activity android:name=".ListaDepartamentosActivity"/>
+        <activity
+            android:name=".AltaReservaActivity"
+            android:label="Alta Reserva"/>
+        <activity
+            android:name=".ListaReservaActivity"
+            android:label="Reservas">
+        </activity>
+
+        <receiver android:name=".CustomReceiver">
+            <intent-filter>
+                <action android:name="dam.isi.frsf.utn.edu.ar.laboratorio04.ListaDepartamentosActivity.ReceptorAlarma"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".SettingsActivity">
+        </activity>
+
+        <receiver
+            android:name=".NotificatorBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="dam.isi.frsf.utn.edu.ar.laboratorio04.notificatorReceiver"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

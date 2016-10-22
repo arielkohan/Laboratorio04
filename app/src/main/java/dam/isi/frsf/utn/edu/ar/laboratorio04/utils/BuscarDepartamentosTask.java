@@ -8,8 +8,6 @@ import java.util.List;
 
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Ciudad;
 import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Departamento;
-import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.BusquedaFinalizadaListener;
-import dam.isi.frsf.utn.edu.ar.laboratorio04.utils.FormBusqueda;
 
 /**
  * Created by martdominguez on 22/09/2016.
@@ -34,8 +32,6 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
     @Override
     protected void onProgressUpdate(Integer... values) {
         listener.busquedaActualizada("departamento "+values[0]);
-
-
     }
 
     @Override
@@ -48,17 +44,16 @@ public class BuscarDepartamentosTask extends AsyncTask<FormBusqueda,Integer,List
         // TODO implementar: buscar todos los departamentos del sistema e ir chequeando las condiciones 1 a 1.
         // si cumplen las condiciones agregarlo a los resultados.
 
-        FormBusqueda busquedaActual = busqueda[0];       //SI HAGO ESTO PODRIA REEMPLAZARLO ARRIBA PERO POR LAS DUDAS AHORA NO LO HAGO
+        FormBusqueda busquedaActual = busqueda[0];
 
         for( Departamento d: todos ){
             if(
                 (busquedaActual.getPermiteFumar() == ! d.getNoFumador()) &&
                 (ciudadBuscada.equals(d.getCiudad())) &&
-                //(busquedaActual.getHuespedes() == )&& TODO: VER EL TEMA HUESPEDES
+                //(busquedaActual.getHuespedes() == )&& TODO: VER TEMA HUESPEDES
                 (busquedaActual.getPrecioMaximo() == null   ||  busquedaActual.getPrecioMaximo() >= d.getPrecio()) &&
                 (busquedaActual.getPrecioMinimo() == null   ||   busquedaActual.getPrecioMinimo() <= d.getPrecio())
             )   {
-
                         resultado.add(d);
 
                 }

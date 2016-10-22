@@ -10,4 +10,5 @@
     <string name="fecha_fin">Fecha fin (formato:"dd-mm-aaaa"):</string>
     <string name="precio_final">Precio final:</string>
     <string name="departamento">Departamento:</string>
+    <string name="sin_reservas">No hay reservas realizadas.</string>
 </resources>
