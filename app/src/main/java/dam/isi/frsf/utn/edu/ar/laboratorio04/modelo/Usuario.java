@@ -17,10 +17,11 @@ public class Usuario implements Serializable {
 
 
     public static Usuario getInstance(){
-        if(singletonInstance != null)
-            return singletonInstance;
+        if(singletonInstance == null) {
+            singletonInstance = new Usuario(1, "user@mail.com");
+        }
 
-        return new Usuario(1, "user@mail.com");
+        return singletonInstance;
     }
 
     private Usuario(Integer id, String correo) {
@@ -63,6 +64,6 @@ public class Usuario implements Serializable {
     public void agregarReserva(Reserva reserva) {
         if(reservas == null)
             reservas = new ArrayList<Reserva>();
-        this.reservas.add(reserva);
+        reservas.add(reserva);
     }
 }

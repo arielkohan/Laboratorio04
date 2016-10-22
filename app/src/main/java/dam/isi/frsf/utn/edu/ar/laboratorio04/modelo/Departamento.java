@@ -160,6 +160,7 @@ public class Departamento implements Serializable {
     public static List<Departamento> getAlojamientosDisponibles(){
         Random rReservas = new Random();
         if(_FLAG_INICIALIZADO) return  _ALOJAMIENTOS_DISPONIBLES;
+        Usuario usuario = Usuario.getInstance();
 
         for(int i=0;i<100;i++){
             Departamento aux = new Departamento(i+1);
@@ -172,7 +173,8 @@ public class Departamento implements Serializable {
                 inicio.add(Calendar.DAY_OF_YEAR,inicioreserva);
                 Date fechaInicio = inicio.getTime();
                 inicio.add(Calendar.DAY_OF_YEAR, rReservas.nextInt(8)+1);
-                Reserva r = new Reserva((i*10)+j,fechaInicio ,inicio.getTime(),aux);
+                Reserva r = new Reserva((i*10)+j,fechaInicio ,inicio.getTime(),aux, usuario);
+                usuario.agregarReserva(r);
                 aux.getReservas().add(r);
             }
         }
