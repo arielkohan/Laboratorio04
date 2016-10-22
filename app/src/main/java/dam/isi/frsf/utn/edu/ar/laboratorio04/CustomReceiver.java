@@ -15,6 +15,7 @@ import dam.isi.frsf.utn.edu.ar.laboratorio04.modelo.Reserva;
 
 public class CustomReceiver extends BroadcastReceiver{
 
+    public static final String _NOTIFICATOR_RECEIVER = "dam.isi.frsf.utn.edu.ar.laboratorio04.notificatorReceiver";
     private Context mContext = null;
 
     @Override
@@ -29,25 +30,7 @@ public class CustomReceiver extends BroadcastReceiver{
             Reserva reserva = (Reserva) intent.getSerializableExtra("reserva");
             String descripcionReserva = reserva.toString();
 
-//            Intent notificationIntent = new Intent(context, ListaReservaActivity.class);
-//            PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-            /*SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            String ringtoneString = sharedPreferences.getString("pref_ringtone", "DEFAULT_SOUND");
-            Uri ringtoneUri = Uri.parse(ringtoneString);*/
-
-//            NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-//                    .setContentTitle("Reserva Confirmada")
-//                    .setContentText(descripcionReserva)
-//                    .setSmallIcon(R.drawable.ic_menu_gallery)
-//                    .setContentIntent(pi)
-//                    .setAutoCancel(true)
-//                    .setSound(ringtoneUri);
-
-//            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//            manager.notify(1, builder.build());
-            Intent broadcastIntent = new Intent("dam.isi.frsf.utn.edu.ar.laboratorio04.notificatorReceiver");
+            Intent broadcastIntent = new Intent(_NOTIFICATOR_RECEIVER);
             broadcastIntent.putExtra("title", "Reserva Confirmada.");
             broadcastIntent.putExtra("text", descripcionReserva);
             broadcastIntent.putExtra("icon", R.drawable.ic_menu_gallery);
