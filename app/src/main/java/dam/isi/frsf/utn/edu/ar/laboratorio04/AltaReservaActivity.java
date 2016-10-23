@@ -61,6 +61,9 @@ public class AltaReservaActivity extends AppCompatActivity {
                     Date fechaInicio = df.parse(editTextFechaInicio.getText().toString());
                     Date fechaFin = df.parse(editTextFechaFin.getText().toString());
 
+                    if( fechaInicio.after(fechaFin))
+                        throw new Exception("La fecha de inicio debe ser anterior a la fecha de fin.");
+
                     Reserva reserva = new Reserva(fechaInicio, fechaFin, departamento , Usuario.getInstance());
                     Usuario.getInstance().agregarReserva(reserva);
                     departamento.agregarReserva(reserva);
@@ -87,10 +90,10 @@ public class AltaReservaActivity extends AppCompatActivity {
                             pi
                             );
                     finish();
-                } catch (ParseException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(AltaReservaActivity.this, "Hubo un error en dar de alta su reserva. Intentelo nuevamente.", Toast.LENGTH_SHORT).show();
-                    finish();
+                   // finish();
                 }
             }
         });
